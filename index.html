@@ -15,6 +15,14 @@
 <link rel="icon" href="icon-192.png">
 <link rel="stylesheet" href="vendor/leaflet.css?v=febd435f53">
 <link rel="stylesheet" href="app.css?v=febd435f53">
+<!-- MW brand fonts (Khand headings, Hind body; tokens from maxweberman.com brand-tokens.css) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@500;600;700&family=Hind:wght@400;500;600;700&display=swap">
+<style id="mw-brand-fonts">
+:root{--mw-font-heading:"Khand","Arial Narrow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mw-font-body:"Hind",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji"}
+html body,html body :where(*:not(code,pre,kbd,samp)){font-family:var(--mw-font-body)!important}
+html body :is(h1,h2,h3,h4,h5,h6),html body :is(h1,h2,h3,h4,h5,h6) :where(*:not(code)){font-family:var(--mw-font-heading)!important;font-weight:700;letter-spacing:0}
+</style>
 </head><body>
 <header id="top">
   <div class="brand">🏠 Akiya</div>
