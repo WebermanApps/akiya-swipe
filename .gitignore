@@ -1,0 +1,7 @@
+.netlify/
+*.log
+.DS_Store
+cache/
+node_modules/
+.env*
+*.bak*
