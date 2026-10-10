@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>Akiya Keep or Toss</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Akiya">
+<meta name="theme-color" content="#2b2a27">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="vendor/leaflet.css?v=35012bd4b6">
+<link rel="stylesheet" href="app.css?v=35012bd4b6">
+</head><body>
+<header id="top">
+  <div class="brand">🏠 Akiya</div>
+  <div id="progress"><b id="revN">0</b> of <b id="revT">0</b> reviewed</div>
+  <button id="menuBtn" class="ib" aria-label="Menu">⋯</button>
+</header>
+<div id="tip" hidden></div>
+<main>
+  <section id="v-swipe" class="view on">
+    <div id="deck"></div>
+    <div id="empty" hidden></div>
+  </section>
+  <section id="v-map" class="view"><div id="map"></div><div id="sheet" hidden></div></section>
+  <section id="v-list" class="view"><div id="list"></div></section>
+</main>
+<div id="actions">
+  <button id="bToss" class="act toss" aria-label="Toss">✕</button>
+  <button id="bUndo" class="act undo" aria-label="Undo">↶</button>
+  <button id="bKeep" class="act keep" aria-label="Keep">♥</button>
+</div>
+<nav id="tabs">
+  <button class="tab on" data-v="swipe"><span>🃏</span>Swipe</button>
+  <button class="tab" data-v="map"><span>🗺️</span>Map</button>
+  <button class="tab" data-v="list"><span>♥</span>Kept <i id="keptN">0</i></button>
+</nav>
+<div id="menu" hidden>
+  <div class="mcard">
+    <h3>Your list</h3>
+    <p class="small">Decisions are saved on this device only (separate list per person / per phone).</p>
+    <button id="mExport" class="mb">⬇ Export decisions (JSON)</button>
+    <button id="mShare" class="mb" hidden>📤 Share decisions file…</button>
+    <button id="mImport" class="mb">⬆ Import decisions…</button>
+    <input type="file" id="impFile" accept=".json,application/json" hidden>
+    <button id="mTip" class="mb">ℹ︎ How to install / use</button>
+    <button id="mReset" class="mb warn">Reset my decisions…</button>
+    <p class="small" id="about"></p>
+    <button id="mClose" class="mb close">Close</button>
+  </div>
+</div>
+<div id="viewer" hidden><div id="vcar"></div><div id="vcount"></div><button id="vclose" class="ib" aria-label="Close">✕</button></div>
+<div id="toast"></div>
+<script src="vendor/leaflet.js?v=35012bd4b6"></script>
+<script src="app.js?v=35012bd4b6"></script>
+</body></html>
