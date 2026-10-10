@@ -23,6 +23,32 @@
 html body,html body :where(*:not(code,pre,kbd,samp)){font-family:var(--mw-font-body)!important}
 html body :is(h1,h2,h3,h4,h5,h6),html body :is(h1,h2,h3,h4,h5,h6) :where(*:not(code)){font-family:var(--mw-font-heading)!important;font-weight:700;letter-spacing:0}
 </style>
+
+<!--mw-polish--><style id="mw-polish">
+/* MW polish layer: /workspace/ops/brand/app-polish-spec.md (Oct 10, 2026). Light mode, brand motion, 44px targets. */
+:root{--mw-ease:cubic-bezier(.2,.8,.2,1);--mw-dur:180ms;--mw-ink:#171717;--mw-grey:#737373;--mw-line:#E5E5E5;--mw-jungle:#0B6E4F;--mw-lagoon:#05668D;--mw-terra:#C1502E}
+html{color-scheme:light only}
+:where(button,.btn,a.btn,[role=button]){transition:translate var(--mw-dur) var(--mw-ease),scale var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease)}
+@media (hover:hover){:where(button,.btn,a.btn):not(:disabled):not(.leaflet-container *):hover{translate:0 -1px;scale:1.03;box-shadow:0 6px 18px rgba(10,10,10,.12)}}
+:where(button,.btn):not(:disabled):not(.leaflet-container *):active{scale:.97}
+:where(a:not(.btn)){text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--mw-lagoon);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+.mw-share{min-height:44px;min-width:44px;padding:0 14px;border:2px solid var(--mw-ink);background:#fff;color:var(--mw-ink);font-family:Khand,Hind,system-ui,sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;border-radius:0;cursor:pointer}
+.mw-share-float{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50}
+
+/* Akiya Swipe: light top bar, Khand title, 44px targets, photo-top cards rounded 16 */
+#top{background:#fff!important;color:var(--mw-ink)!important;border-bottom:1px solid var(--mw-line);box-shadow:none!important}
+#top .brand{font-family:Khand,Hind,sans-serif!important;font-weight:700!important;font-size:20px!important;letter-spacing:.02em;color:var(--mw-ink)}
+#top #progress{color:var(--mw-grey)!important}
+#top .ib,#top .fbtn,#top button{background:#F5F5F5!important;color:var(--mw-ink)!important;border:1px solid var(--mw-line)!important}
+.ib{min-width:44px!important;min-height:44px!important}
+.pa,.pz{min-width:44px!important;min-height:44px!important}
+#tipOk{min-height:44px!important;border-radius:0!important;font-family:Khand,Hind,sans-serif!important;font-weight:700!important;letter-spacing:.1em;text-transform:uppercase}
+.card,#card{border-radius:16px}
+.lnk{display:inline-flex!important;align-items:center;min-height:44px}
+
+</style><!--/mw-polish-->
 </head><body>
 <header id="top">
   <div class="brand">🏠 Akiya</div>
