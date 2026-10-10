@@ -1,6 +1,6 @@
 'use strict';
 /* Akiya Keep or Toss – mobile PWA. Separate list per device: decisions live in this browser's localStorage only. */
-const V = '35012bd4b6';
+const V = 'febd435f53';
 const LS_DEC = 'akiya_decisions_v1', LS_SES = 'akiya_session_v1', LS_TIP = 'akiya_tip_seen_v1', LS_ORDER = 'akiya_front_v1';
 const $ = s => document.querySelector(s);
 const fmt = n => n == null ? '–' : Math.round(n).toLocaleString('en-US');
@@ -162,7 +162,7 @@ function drawKept() {
 }
 function sheet(l) {
   const s = $('#sheet'); s.hidden = false;
-  s.innerHTML = `<button class="x" aria-label="Close">✕</button>${l.rank ? `<span class="pill Ikon">Shortlist #${l.rank}</span>` : ''}${l.status !== 'active' ? '<span class="gone">NO LONGER LISTED</span>' : ''}
+  s.innerHTML = `<button class="x" aria-label="Close">✕</button>${l.rank ? `<span class="pill Ikon">Shortlist #${l.rank}</span>` : ''}${l.status !== 'active' ? `<span class="gone">${l.status === 'land_only' ? 'LAND ONLY (hidden)' : 'NO LONGER LISTED'}</span>` : ''}
   <div class="price">¥${fmt(l.jpy)} <small>≈ US$${fmt(l.usd)}</small></div><div class="ttl">${esc(l.title)}</div>
   <div class="loc">📍 ${esc(l.city_en)}, ${esc(l.pref)} ${l.prec === 'city' ? '(town-level, approx)' : '(approx)'}</div>${nearHTML(l, true)}
   <div class="specs">${specs(l).map(x => `<span>${x}</span>`).join('')}</div><div class="chips">${l.flags.map(f => `<span class="chip">${esc(f)}</span>`).join('')}</div>
@@ -178,7 +178,7 @@ function drawList() {
   const k = kept().sort((a, b) => a.near[0].min - b.near[0].min), t = D.listings.filter(l => dec[l.id]?.d === 'toss');
   $('#list').innerHTML = (k.length ? '' : '<p class="small" style="padding:20px;text-align:center">Nothing kept yet – swipe right (or ♥) on houses you like.</p>') +
     k.map(l => `<div class="li" data-id="${l.id}"><img loading="lazy" src="${l.thumb || l.photos[0] || ''}" alt=""><div class="b">
-      <div><b>¥${fmt(l.jpy)}</b> <span class="small">≈ $${fmt(l.usd)}</span> ${l.status !== 'active' ? '<span class="gone">NO LONGER LISTED</span>' : ''}</div>
+      <div><b>¥${fmt(l.jpy)}</b> <span class="small">≈ $${fmt(l.usd)}</span> ${l.status !== 'active' ? `<span class="gone">${l.status === 'land_only' ? 'LAND ONLY (hidden)' : 'NO LONGER LISTED'}</span>` : ''}</div>
       <div class="t">${esc(l.title)}</div><div class="small">⛷ ${esc(l.near[0].name)} ~${l.near[0].min} min · ${esc(l.city_en)}</div>
       <div class="row"><a href="${esc(l.url)}" target="_blank" rel="noopener">Listing ↗</a><a href="#" class="onmap">Map</a><a href="#" class="pics">Photos (${l.photos.length})</a><button class="unk">Un-keep</button></div></div></div>`).join('') +
     `<details class="tossed"><summary>Tossed (${t.length})</summary>${t.map(l => `<div class="tl" data-id="${l.id}"><span>¥${fmt(l.jpy)} · ${esc(l.title)}</span><a href="#" class="restore">restore</a></div>`).join('') || '<p class="small">none</p>'}</details>`;
