@@ -1,6 +1,6 @@
 /* Service worker: app shell + data precached; photos cached as they are viewed. */
-const V = '92e3fe48e5', SHELL = 'akiya-shell-' + V, PHOTOS = 'akiya-photos-v1';
-const ASSETS = ['./', 'index.html', 'app.css?v=' + V, 'app.js?v=' + V, 'submit.js?v=' + V, 'vendor/leaflet.js?v=' + V, 'vendor/leaflet.css?v=' + V,
+const V = 'e5567e7698', SHELL = 'akiya-shell-' + V, PHOTOS = 'akiya-photos-v1';
+const ASSETS = ['./', 'index.html', 'app.css?v=' + V, 'app.js?v=' + V, 'submit.js?v=' + V, 'ptr.js?v=' + V, 'vendor/leaflet.js?v=' + V, 'vendor/leaflet.css?v=' + V,
   'japan.json?v=' + V, 'data.json?v=' + V, 'manifest.json', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', e => e.waitUntil(caches.open(SHELL).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('akiya-shell-') && k !== SHELL).map(k => caches.delete(k)))).then(() => self.clients.claim())));

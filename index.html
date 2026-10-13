@@ -13,8 +13,8 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
-<link rel="stylesheet" href="vendor/leaflet.css?v=92e3fe48e5">
-<link rel="stylesheet" href="app.css?v=92e3fe48e5">
+<link rel="stylesheet" href="vendor/leaflet.css?v=e5567e7698">
+<link rel="stylesheet" href="app.css?v=e5567e7698">
 <!-- MW brand fonts (Khand headings, Hind body; tokens from maxweberman.com brand-tokens.css) -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@500;600;700&family=Hind:wght@400;500;600;700&display=swap">
@@ -58,11 +58,11 @@ html{color-scheme:light only}
 <div id="tip" hidden></div>
 <main>
   <section id="v-swipe" class="view on">
-    <div id="deck"></div>
+    <div id="deck" data-ptr-ignore></div>
     <div id="empty" hidden><p id="emptyMsg"></p><div id="submitBox"></div></div>
   </section>
-  <section id="v-map" class="view"><div id="map"></div><div id="sheet" hidden></div></section>
-  <section id="v-list" class="view"><div id="list"></div></section>
+  <section id="v-map" class="view" data-ptr-ignore><div id="map"></div><div id="sheet" hidden></div></section>
+  <section id="v-list" class="view" data-ptr-ignore><div id="list"></div></section>
 </main>
 <div id="actions">
   <button id="bToss" class="act toss" aria-label="Toss">✕</button>
@@ -74,7 +74,7 @@ html{color-scheme:light only}
   <button class="tab" data-v="map"><span>🗺️</span>Map</button>
   <button class="tab" data-v="list"><span>♥</span>Kept <i id="keptN">0</i></button>
 </nav>
-<div id="menu" hidden>
+<div id="menu" hidden data-ptr-ignore>
   <div class="mcard">
     <h3>Your list</h3>
     <div id="submitBoxMenu"></div>
@@ -89,9 +89,10 @@ html{color-scheme:light only}
     <button id="mClose" class="mb close">Close</button>
   </div>
 </div>
-<div id="viewer" hidden><div id="vcar"></div><div id="vcount"></div><button id="vclose" class="ib" aria-label="Close">✕</button></div>
+<div id="viewer" hidden data-ptr-ignore><div id="vcar"></div><div id="vcount"></div><button id="vclose" class="ib" aria-label="Close">✕</button></div>
 <div id="toast"></div>
-<script src="vendor/leaflet.js?v=92e3fe48e5"></script>
-<script src="submit.js?v=92e3fe48e5"></script>
-<script src="app.js?v=92e3fe48e5"></script>
+<script src="vendor/leaflet.js?v=e5567e7698"></script>
+<script src="ptr.js?v=e5567e7698" defer></script>
+<script src="submit.js?v=e5567e7698"></script>
+<script src="app.js?v=e5567e7698"></script>
 </body></html>

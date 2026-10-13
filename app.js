@@ -1,6 +1,6 @@
 'use strict';
 /* Akiya Keep or Toss – mobile PWA. Separate list per device: decisions live in this browser's localStorage only. */
-const V = '92e3fe48e5';
+const V = 'e5567e7698';
 const LS_DEC = 'akiya_decisions_v1', LS_SES = 'akiya_session_v1', LS_TIP = 'akiya_tip_seen_v1', LS_ORDER = 'akiya_front_v1';
 const $ = s => document.querySelector(s);
 const fmt = n => n == null ? '–' : Math.round(n).toLocaleString('en-US');

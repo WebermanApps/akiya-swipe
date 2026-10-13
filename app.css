@@ -2,7 +2,7 @@
 --bg:#f4f1ea;--ink:#222;--dark:#2b2a27;--keep:#1a9e4b;--toss:#d33;--ikon:#f2a900;--epic:#1a5cc8;--tabh:56px;--acth:76px;--toph:46px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font:15px/1.35 -apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",sans-serif;
- overscroll-behavior:none;-webkit-text-size-adjust:100%;touch-action:manipulation}
+ -webkit-text-size-adjust:100%;touch-action:manipulation}
 body{position:fixed;inset:0}
 button{font:inherit;touch-action:manipulation;cursor:pointer}
 img{-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none}
