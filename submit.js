@@ -25,7 +25,7 @@
     function state(s){b.classList.remove('sent','fail');b.disabled=false;
       if(s==='idle'){b.textContent='Submit';m.textContent='';}
       if(s==='sending'){b.textContent='Sending';b.disabled=true;m.textContent='';}
-      if(s==='sent'){b.innerHTML=CHECK+'<span>Sent</span>';b.classList.add('sent');m.textContent='Sent to Max. Tap again to send an update.';}
+      if(s==='sent'){b.innerHTML=CHECK+'<span>Sent</span>';b.classList.add('sent');m.textContent='Sent. Tap again to send an update.';}
       if(s==='fail'){b.textContent='Not Sent Yet';b.classList.add('fail');m.textContent='Saved on this device. Tap to retry; it also retries when you reopen.';}}
     b.addEventListener('click',function(){if(b.disabled)return;state('sending');
       var p={agent:o.agent,app:o.app,deck:o.deck,results:o.getResults?o.getResults():null,notes:o.getNotes?o.getNotes():'',sentAt:new Date().toISOString(),ua:navigator.userAgent};
