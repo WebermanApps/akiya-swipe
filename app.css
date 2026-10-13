@@ -89,3 +89,8 @@ details.tossed{margin-top:14px}details.tossed summary{color:#555;padding:6px 2px
 #toast.on{opacity:1}
 .leaflet-container{font:inherit}
 .tab i:empty,.tab i[data-z]{display:none}
+
+#tip{padding:0!important}#tipD summary{min-height:44px;display:flex;align-items:center;padding:0 14px;font-weight:600;cursor:pointer;list-style:none}
+#tipD summary::-webkit-details-marker{display:none}#tipD summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid #0A0A0A;border-bottom:2px solid #0A0A0A;transform:rotate(45deg);transition:transform .18s}
+#tipD[open] summary::after{transform:rotate(-135deg)}#tipD summary:focus-visible{outline:3px solid #05668D;outline-offset:-3px}
+#tipD>div{padding:0 14px 10px}#tipD #tipOk{float:none;display:block;margin:0 14px 12px auto}

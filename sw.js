@@ -1,5 +1,5 @@
 /* Service worker: app shell + data precached; photos cached as they are viewed. */
-const V = '36de62a45c', SHELL = 'akiya-shell-' + V, PHOTOS = 'akiya-photos-v1';
+const V = '3f777e5e4b', SHELL = 'akiya-shell-' + V, PHOTOS = 'akiya-photos-v1';
 const ASSETS = ['./', 'index.html', 'app.css?v=' + V, 'app.js?v=' + V, 'vendor/leaflet.js?v=' + V, 'vendor/leaflet.css?v=' + V,
   'japan.json?v=' + V, 'data.json?v=' + V, 'manifest.json', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', e => e.waitUntil(caches.open(SHELL).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())));

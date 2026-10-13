@@ -1,6 +1,6 @@
 'use strict';
 /* Akiya Keep or Toss – mobile PWA. Separate list per device: decisions live in this browser's localStorage only. */
-const V = '36de62a45c';
+const V = '3f777e5e4b';
 const LS_DEC = 'akiya_decisions_v1', LS_SES = 'akiya_session_v1', LS_TIP = 'akiya_tip_seen_v1', LS_ORDER = 'akiya_front_v1';
 const $ = s => document.querySelector(s);
 const fmt = n => n == null ? '–' : Math.round(n).toLocaleString('en-US');
@@ -213,8 +213,8 @@ const standalone = () => window.navigator.standalone === true || matchMedia('(di
 function showTip(force) {
   if (!force && (localStorage.getItem(LS_TIP) || standalone())) return;
   const t = $('#tip'); t.hidden = false;
-  t.innerHTML = `<button id="tipOk">Got it</button><b>Add to Home Screen:</b> Share <span aria-hidden="true">⬆︎</span> → <b>Add to Home Screen</b>.<br>
-  <span class="small">Swipe the <b>text area</b> left/right (or use ✕ ♥) to toss/keep; swipe or tap the <b>photo</b> to see more photos. Your list stays on this phone – Safari and the Home-Screen app keep separate lists, so install first (or use ⋯ → Export/Import).</span>`;
+  t.innerHTML = `<details id="tipD"${force ? ' open' : ''}><summary>Tips: Install And Use</summary><div class="small"><b>Add to Home Screen:</b> tap Share, then <b>Add to Home Screen</b>.<br>
+  Swipe the <b>text area</b> left/right (or use the buttons) to toss/keep; swipe or tap the <b>photo</b> to see more photos. Your list stays on this phone. Safari and the Home-Screen app keep separate lists, so install first (or use the menu: Export/Import).</div><button id="tipOk">Got it</button></details>`;
   $('#tipOk').onclick = () => { t.hidden = true; localStorage.setItem(LS_TIP, '1') };
 }
 $('#mTip').onclick = () => { menu.hidden = true; showTip(true) };
