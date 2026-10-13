@@ -1,6 +1,6 @@
 'use strict';
 /* Akiya Keep or Toss – mobile PWA. Separate list per device: decisions live in this browser's localStorage only. */
-const V = '3f777e5e4b';
+const V = 'd8d359d994';
 const LS_DEC = 'akiya_decisions_v1', LS_SES = 'akiya_session_v1', LS_TIP = 'akiya_tip_seen_v1', LS_ORDER = 'akiya_front_v1';
 const $ = s => document.querySelector(s);
 const fmt = n => n == null ? '–' : Math.round(n).toLocaleString('en-US');
@@ -47,7 +47,7 @@ let cur = null;
 function render() {
   deck.innerHTML = ''; const q = queue();
   $('#empty').hidden = !!q.length; $('#actions').hidden = !q.length || !$('#v-swipe').classList.contains('on');
-  if (!q.length) $('#empty').innerHTML = `🎉 You've reviewed all ${ACTIVE.length} houses.<br><br>See your <b>Kept</b> tab, or use ⋯ → Export to save your list.`;
+  if (!q.length) $('#emptyMsg').innerHTML = `You've reviewed all ${ACTIVE.length} houses. Tap <b>Submit</b> to send your picks to Japan Cottage.<br><br>Export (menu) still works as a backup.`;
   q.slice(0, 2).reverse().forEach((l, i, a) => {
     const top = i === a.length - 1, c = document.createElement('div');
     c.className = 'card' + (top ? '' : ' back'); c.dataset.id = l.id; c.innerHTML = cardHTML(l, top); deck.appendChild(c);
@@ -232,3 +232,9 @@ fetch('data.json?v=' + V).then(r => r.json()).then(data => {
 }).catch(e => { $('#deck').innerHTML = `<p style="padding:20px">Could not load data (${esc(e)}). Open this app over http(s).</p>` });
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => { });
 if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => { });
+
+// ---------------------------------------------------------------- Submit to Japan Cottage (shared receiver)
+const submitOpts = () => ({ agent: 'japan-cottage', app: 'akiya-swipe', deck: 'akiya-' + new Date().toISOString().slice(0, 10),
+  getResults: () => { const r = { app: 'akiya-keep-or-toss', version: 1, exported: new Date().toISOString(), decisions: dec }; try { localStorage.setItem('akiya_submit_backup_v1', JSON.stringify(r)) } catch (_) { } return r },
+  getNotes: () => '' });
+if (window.MWSubmit) { MWSubmit.button($('#submitBox'), submitOpts()); MWSubmit.button($('#submitBoxMenu'), submitOpts()); }

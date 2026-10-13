@@ -13,8 +13,8 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
-<link rel="stylesheet" href="vendor/leaflet.css?v=3f777e5e4b">
-<link rel="stylesheet" href="app.css?v=3f777e5e4b">
+<link rel="stylesheet" href="vendor/leaflet.css?v=d8d359d994">
+<link rel="stylesheet" href="app.css?v=d8d359d994">
 <!-- MW brand fonts (Khand headings, Hind body; tokens from maxweberman.com brand-tokens.css) -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@500;600;700&family=Hind:wght@400;500;600;700&display=swap">
@@ -59,7 +59,7 @@ html{color-scheme:light only}
 <main>
   <section id="v-swipe" class="view on">
     <div id="deck"></div>
-    <div id="empty" hidden></div>
+    <div id="empty" hidden><p id="emptyMsg"></p><div id="submitBox"></div></div>
   </section>
   <section id="v-map" class="view"><div id="map"></div><div id="sheet" hidden></div></section>
   <section id="v-list" class="view"><div id="list"></div></section>
@@ -77,6 +77,7 @@ html{color-scheme:light only}
 <div id="menu" hidden>
   <div class="mcard">
     <h3>Your list</h3>
+    <div id="submitBoxMenu"></div>
     <p class="small">Decisions are saved on this device only (separate list per person / per phone).</p>
     <button id="mExport" class="mb">⬇ Export decisions (JSON)</button>
     <button id="mShare" class="mb" hidden>📤 Share decisions file…</button>
@@ -90,6 +91,7 @@ html{color-scheme:light only}
 </div>
 <div id="viewer" hidden><div id="vcar"></div><div id="vcount"></div><button id="vclose" class="ib" aria-label="Close">✕</button></div>
 <div id="toast"></div>
-<script src="vendor/leaflet.js?v=3f777e5e4b"></script>
-<script src="app.js?v=3f777e5e4b"></script>
+<script src="vendor/leaflet.js?v=d8d359d994"></script>
+<script src="submit.js?v=d8d359d994"></script>
+<script src="app.js?v=d8d359d994"></script>
 </body></html>

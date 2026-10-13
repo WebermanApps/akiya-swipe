@@ -94,3 +94,5 @@ details.tossed{margin-top:14px}details.tossed summary{color:#555;padding:6px 2px
 #tipD summary::-webkit-details-marker{display:none}#tipD summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid #0A0A0A;border-bottom:2px solid #0A0A0A;transform:rotate(45deg);transition:transform .18s}
 #tipD[open] summary::after{transform:rotate(-135deg)}#tipD summary:focus-visible{outline:3px solid #05668D;outline-offset:-3px}
 #tipD>div{padding:0 14px 10px}#tipD #tipOk{float:none;display:block;margin:0 14px 12px auto}
+
+#empty .mws-wrap{margin:1rem auto}#submitBoxMenu .mws-wrap{margin:.5rem 0 1rem}
