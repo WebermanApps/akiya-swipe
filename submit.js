@@ -17,7 +17,7 @@
 
   /* Password gate (Oct 13 2026 rule): first Submit on a device asks for the team password.
      Only its SHA-256 is stored here. agent==='wellnest' skips the gate. Payloads carry auth:true + authKey (hash prefix). */
-  var PH='7b8bd6c0abf53d22888beafc48830e1156907dd4ec7e6ea31e55a0dd6dc5a969',AK='mw-submit-auth',AP=PH.slice(0,8);
+  var PH='6df85d68da9f1f949bc43346a2d84643736b955194f25738fd74100ae1874523',AK='mw-submit-auth2',AP=PH.slice(0,8);
   function exempt(a){return String(a||'').toLowerCase()==='wellnest';}
   function authed(){try{return localStorage.getItem(AK)===AP}catch(_){return false}}
   function sha256js(str){function R(n,x){return(x>>>n)|(x<<(32-n))}var K=[],H=[],P=[],i,j,c=2;function prime(n){for(var d=2;d*d<=n;d++)if(n%d===0)return false;return true}
