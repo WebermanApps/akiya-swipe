@@ -1,7 +1,7 @@
 /* MWSubmit: shared Submit button. Usage:
    MWSubmit.button(el,{agent,app,deck,getResults:()=>obj,getNotes:()=>str})
    MWSubmit.send({agent,app,deck,results,notes,partial,answered,total,unanswered,test}) -> Promise<bool>  (mid-deck Submit)
-   POSTs text/plain JSON (no-cors) to the shared Apps Script receiver. No token in client code.
+   POSTs text/plain JSON (no-cors) to the shared Apps Script receiver. No secrets in client code.
    PASSWORD GATE: every send goes through MWSubmit.gate(agent) (skipped for agent 'wellnest'). Custom code: await MWSubmit.gate(agent) or just use MWSubmit.send.
    send() resolves false with MWSubmit.blocked=true when the password was not given (nothing sent, nothing queued). */
 (function(w){
