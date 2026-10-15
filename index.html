@@ -1,98 +1,20 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<title>Akiya Keep or Toss</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Akiya">
-<meta name="theme-color" content="#2b2a27">
-<meta name="format-detection" content="telephone=no">
-<meta name="robots" content="noindex,nofollow">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" href="icon-192.png">
-<link rel="stylesheet" href="vendor/leaflet.css?v=506de3eee7">
-<link rel="stylesheet" href="app.css?v=506de3eee7">
-<!-- MW brand fonts (Khand headings, Hind body; tokens from maxweberman.com brand-tokens.css) -->
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@500;600;700&family=Hind:wght@400;500;600;700&display=swap">
-<style id="mw-brand-fonts">
-:root{--mw-font-heading:"Khand","Arial Narrow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mw-font-body:"Hind",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji"}
-html body,html body :where(*:not(code,pre,kbd,samp)){font-family:var(--mw-font-body)!important}
-html body :is(h1,h2,h3,h4,h5,h6),html body :is(h1,h2,h3,h4,h5,h6) :where(*:not(code)){font-family:var(--mw-font-heading)!important;font-weight:700;letter-spacing:0}
-</style>
-
-<!--mw-polish--><style id="mw-polish">
-/* MW polish layer: /workspace/ops/brand/app-polish-spec.md (Oct 10, 2026). Light mode, brand motion, 44px targets. */
-:root{--mw-ease:cubic-bezier(.2,.8,.2,1);--mw-dur:180ms;--mw-ink:#171717;--mw-grey:#737373;--mw-line:#E5E5E5;--mw-jungle:#0B6E4F;--mw-lagoon:#05668D;--mw-terra:#C1502E}
-html{color-scheme:light only}
-:where(button,.btn,a.btn,[role=button]){transition:translate var(--mw-dur) var(--mw-ease),scale var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease)}
-@media (hover:hover){:where(button,.btn,a.btn):not(:disabled):not(.leaflet-container *):hover{translate:0 -1px;scale:1.03;box-shadow:0 6px 18px rgba(10,10,10,.12)}}
-:where(button,.btn):not(:disabled):not(.leaflet-container *):active{scale:.97}
-:where(a:not(.btn)){text-underline-offset:4px}
-:focus-visible{outline:2px solid var(--mw-lagoon);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
-.mw-share{min-height:44px;min-width:44px;padding:0 14px;border:2px solid var(--mw-ink);background:#fff;color:var(--mw-ink);font-family:Khand,Hind,system-ui,sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;border-radius:0;cursor:pointer}
-.mw-share-float{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50}
-
-/* Akiya Swipe: light top bar, Khand title, 44px targets, photo-top cards rounded 16 */
-#top{background:#fff!important;color:var(--mw-ink)!important;border-bottom:1px solid var(--mw-line);box-shadow:none!important}
-#top .brand{font-family:Khand,Hind,sans-serif!important;font-weight:700!important;font-size:20px!important;letter-spacing:.02em;color:var(--mw-ink)}
-#top #progress{color:var(--mw-grey)!important}
-#top .ib,#top .fbtn,#top button{background:#F5F5F5!important;color:var(--mw-ink)!important;border:1px solid var(--mw-line)!important}
-.ib{min-width:44px!important;min-height:44px!important}
-.pa,.pz{min-width:44px!important;min-height:44px!important}
-#tipOk{min-height:44px!important;border-radius:0!important;font-family:Khand,Hind,sans-serif!important;font-weight:700!important;letter-spacing:.1em;text-transform:uppercase}
-.card,#card{border-radius:16px}
-.lnk{display:inline-flex!important;align-items:center;min-height:44px}
-
-</style><!--/mw-polish-->
-</head><body>
-<header id="top">
-  <a id="backDash" class="brand" href="https://webermanapps.github.io/jc-cc-e034959dac7d/" aria-label="Back to Japan Cottage dashboard"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Dashboard</a>
-  <div id="progress"><b id="revN">0</b> of <b id="revT">0</b> reviewed</div>
-  <button id="menuBtn" class="ib" aria-label="Menu">⋯</button>
-</header>
-<div id="tip" hidden></div>
-<main>
-  <section id="v-swipe" class="view on">
-    <div id="deck" data-ptr-ignore></div>
-    <div id="empty" hidden><p id="emptyMsg"></p><div id="submitBox"></div></div>
-  </section>
-  <section id="v-map" class="view" data-ptr-ignore><div id="map"></div><div id="sheet" hidden></div></section>
-  <section id="v-list" class="view" data-ptr-ignore><div id="list"></div></section>
-</main>
-<div id="actions">
-  <button id="bToss" class="act toss" aria-label="Toss">✕</button>
-  <button id="bUndo" class="act undo" aria-label="Undo">↶</button>
-  <button id="bKeep" class="act keep" aria-label="Keep">♥</button>
-</div>
-<nav id="tabs">
-  <button class="tab on" data-v="swipe"><span>🃏</span>Swipe</button>
-  <button class="tab" data-v="map"><span>🗺️</span>Map</button>
-  <button class="tab" data-v="list"><span>♥</span>Kept <i id="keptN">0</i></button>
-</nav>
-<div id="menu" hidden data-ptr-ignore>
-  <div class="mcard">
-    <h3>Your list</h3>
-    <div id="submitBoxMenu"></div>
-    <p class="small">Decisions are saved on this device only (separate list per person / per phone).</p>
-    <button id="mExport" class="mb">⬇ Export decisions (JSON)</button>
-    <button id="mShare" class="mb" hidden>📤 Share decisions file…</button>
-    <button id="mImport" class="mb">⬆ Import decisions…</button>
-    <input type="file" id="impFile" accept=".json,application/json" hidden>
-    <button id="mTip" class="mb">ℹ︎ How to install / use</button>
-    <button id="mReset" class="mb warn">Reset my decisions…</button>
-    <p class="small" id="about"></p>
-    <button id="mClose" class="mb close">Close</button>
-  </div>
-</div>
-<div id="viewer" hidden data-ptr-ignore><div id="vcar"></div><div id="vcount"></div><button id="vclose" class="ib" aria-label="Close">✕</button></div>
-<div id="toast"></div>
-<script src="vendor/leaflet.js?v=506de3eee7"></script>
-<script src="ptr.js?v=506de3eee7" defer></script>
-<script src="submit.js?v=506de3eee7"></script>
-<script src="app.js?v=506de3eee7"></script>
-</body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="light only"><meta name="theme-color" content="#FAF6EE">
+<title>Akiya Keep or Toss</title><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="favicon.ico" sizes="any"><link rel="manifest" href="manifest.webmanifest">
+<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#FAF6EE;color:#1a1a1a;font-family:Hind,-apple-system,system-ui,sans-serif}
+body{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 20px}
+.card{width:100%;max-width:360px;background:#fff;border:1px solid #e6dfd1;padding:28px 22px}h1{font-size:28px;margin:0 0 4px;font-weight:700}p{margin:0 0 20px;color:#5c5c5c;font-size:15px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}input[type=password]{width:100%;font-size:16px;min-height:48px;padding:10px 12px;border:1px solid #cfc6b4;background:#fffdf8;border-radius:0}
+.rm{display:flex;align-items:center;gap:10px;margin:14px 0 18px;font-size:15px;min-height:44px}.rm input{width:20px;height:20px}
+button{width:100%;min-height:48px;font-size:16px;font-weight:600;background:#1a1a1a;color:#fff;border:0;border-radius:0;cursor:pointer}
+#err{color:#a12a1b;font-size:14px;min-height:20px;margin:10px 0 0}footer{text-align:center;font-size:13px;color:#737373;padding:16px 16px calc(16px + env(safe-area-inset-bottom))}</style></head>
+<body><main><form class="card" id="f" hidden><h1>Akiya Keep or Toss</h1><p>Enter the password to open.</p>
+<label for="p">Password</label><input id="p" type="password" autocomplete="current-password" required autofocus enterkeyhint="go">
+<label class="rm"><input type="checkbox" id="r" checked> Remember this device</label><button type="submit">Open</button><div id="err" role="alert"></div></form></main>
+<footer>Built by Max Weberman</footer>
+<script>(()=>{const D={"s": "h1YeWA5S7tHNNgfrOtWNBw==", "i": "kXjCDH0OyZq5NoGd", "c": "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", "n": 600000},K='mwPagesKey',u=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0)),f=document.getElementById('f');
+async function dec(raw){const k=await crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:u(D.i)},k,u(D.c)))}
+function show(t){document.open();document.write(t);document.close()}
+addEventListener('DOMContentLoaded',async()=>{const s=localStorage.getItem(K);if(s){try{show(await dec(u(s)));return}catch(e){localStorage.removeItem(K)}}f.hidden=false;document.getElementById('p').focus()});
+f.onsubmit=async e=>{e.preventDefault();const er=document.getElementById('err');er.textContent='';try{const b=await crypto.subtle.importKey('raw',new TextEncoder().encode(document.getElementById('p').value),'PBKDF2',false,['deriveBits']);
+const raw=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',salt:u(D.s),iterations:D.n,hash:'SHA-256'},b,256));const t=await dec(raw);
+if(document.getElementById('r').checked)localStorage.setItem(K,btoa(String.fromCharCode(...raw)));show(t)}catch(x){er.textContent='Wrong password. Try again.'}}})()</script></body></html>
